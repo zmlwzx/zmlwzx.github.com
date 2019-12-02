@@ -1,2 +1,376 @@
-# 一级标题
-## 二级标题
+# 数据库脚本重复执行整理
+[TOC]
+## ORCL
+### 创建表
+```
+--AUTHOR:XXX
+--DATE:XXXX-XX-XX
+--DESCRIPTION:创建表
+
+DECLARE
+VN_COUNT NUMBER;
+VC_STR VARCHAR2(2000);
+BEGIN
+  --查看该表是否存在
+  SELECT COUNT(*)
+    INTO VN_COUNT
+    FROM USER_TABLES WHERE TABLE_NAME= '表名';
+  --如果小于1则说明不存在,则新增表
+  IF VN_COUNT < 1 THEN
+    VC_STR := ' create table 表名  (
+         ID         VARCHAR2(32),
+         字段名     NUMBER(12,4),
+         字段名     TIMESTAMP(6),
+         constraint 主键名 primary key (ID)
+      )';
+  EXECUTE IMMEDIATE VC_STR;
+  EXECUTE IMMEDIATE 'comment on table 表名 is ''XXXX表''';
+  EXECUTE IMMEDIATE 'comment on column 表名.ID is ''ID''';
+  EXECUTE IMMEDIATE 'comment on column 表名.字段名 is ''字段说明''';
+  EXECUTE IMMEDIATE 'comment on column 表名.字段名 is ''字段说明''';
+  END IF;
+END;
+/
+```
+### 删除表
+```
+--AUTHOR:XXX
+--DATE:XXXX-XX-XX
+--DESCRIPTION:删除表
+
+DECLARE 
+VN_COUNT NUMBER;
+VC_STR VARCHAR2(2000);
+BEGIN
+  --查看该表是否存在
+  SELECT COUNT(*)
+   INTO VN_COUNT
+    FROM USER_TABLES WHERE TABLE_NAME='表名';
+  --如果大于0则说明存在,则删除表
+  IF VN_COUNT > 0 THEN
+    VC_STR := 'DROP TABLE 表名';
+EXECUTE IMMEDIATE VC_STR;
+  END IF;
+END;
+/
+```
+### 新增表字段
+```
+--AUTHOR:XXX
+--DATE:XXXX-XX-XX
+--DESCRIPTION:新增表字段
+
+DECLARE V_COUNT NUMBER;
+V_STR VARCHAR2(1000);
+BEGIN
+  SELECT COUNT(*)
+    INTO V_COUNT
+    FROM USER_TAB_COLUMNS
+   WHERE TABLE_NAME = '表名'
+     AND COLUMN_NAME = '字段名';
+  IF V_COUNT < 1 THEN
+    V_STR := 'ALTER TABLE 表名 ADD 字段名 字段类型';
+    EXECUTE IMMEDIATE V_STR;
+    EXECUTE IMMEDIATE 'comment on column 表名.字段名 is ''字段说明''';
+  END IF;
+END;
+/
+
+```
+### 修改表字段
+```
+--AUTHOR:XXX
+--DATE:XXXX-XX-XX
+--DESCRIPTION:修改表字段
+
+DECLARE V_COUNT NUMBER;
+V_STR VARCHAR2(1000);
+BEGIN
+  SELECT COUNT(*)
+    INTO V_COUNT
+    FROM USER_TAB_COLUMNS
+   WHERE TABLE_NAME = '表名'
+     AND COLUMN_NAME = '字段名';
+  IF V_COUNT = 1 THEN
+    V_STR := 'ALTER TABLE 表名 MODIFY 字段名 字段类型';
+    EXECUTE IMMEDIATE V_STR;
+  END IF;
+END;
+/
+
+```
+### 删除表字段
+```
+--AUTHOR:XXX
+--DATE:XXXX-XX-XX
+--DESCRIPTION:删除表字段
+
+DECLARE V_COUNT NUMBER;
+V_STR VARCHAR2(1000);
+BEGIN
+  SELECT COUNT(*)
+    INTO V_COUNT
+    FROM USER_TAB_COLUMNS
+   WHERE TABLE_NAME = '表名'
+     AND COLUMN_NAME = '字段名';
+  IF V_COUNT = 1 THEN
+    V_STR := 'ALTER TABLE 表名 DROP COLUMN 字段名';
+    EXECUTE IMMEDIATE V_STR;
+  END IF;
+END;
+/
+
+```
+
+### 新增数据
+```
+--AUTHOR:XXX
+--DATE:XXXX-XX-XX
+--DESCRIPTION:新增数据
+
+DECLARE
+  V_COUNT NUMBER;       
+BEGIN
+  --查看该表中该菜单是否存在
+  SELECT COUNT(*) 
+    INTO V_COUNT
+    FROM 表名  
+   WHERE ID = XX;
+  --如果小于1则说明不存在，则新增菜单
+  IF V_COUNT < 1 THEN
+     INSERT INTO 表名 (ID, XX, XX)
+  VALUES ('XX', 'XX', 'XX');
+  END IF;
+  COMMIT;
+END;
+/
+
+```
+### 修改数据
+```
+--AUTHOR:XXX
+--DATE:XXXX-XX-XX
+--DESCRIPTION:修改数据
+
+UPDATE 表名 SET 字段名 = 字段值 WHERE ID = 'XX';
+COMMIT;
+/
+```
+### 删除数据
+```
+--AUTHOR:XXX
+--DATE:XXXX-XX-XX
+--DESCRIPTION:删除数据
+
+DELETE FROM 表名 WHERE ID = 'XX';
+COMMIT;
+/
+```
+## MYSQL
+### 创建表
+```
+##AUTHOR:XXX
+##DATE:XXXX-XX-XX
+##DESCRIPTION:创建表
+
+CREATE TABLE IF NOT EXISTS 表名(
+  ID            VARCHAR(32),  
+  字段名        DECIMAL(15,2),
+  字段名        DATETIME,
+  constraint 主键名 primary key (ID)
+);
+##GOGO
+```
+### 删除表
+```
+##AUTHOR:XXX
+##DATE:XXXX-XX-XX
+##DESCRIPTION:删除表
+
+DROP TABLE IF EXISTS 表名;
+```
+### 新增表字段
+```
+##AUTHOR:XXX
+##DATE:XXXX-XX-XX
+##DESCRIPTION:新增表字段
+
+DROP PROCEDURE IF EXISTS PRO_ADD_COL;
+DELIMITER $$
+CREATE PROCEDURE PRO_ADD_COL()
+BEGIN
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = '表名' AND COLUMN_NAME = '字段名') THEN
+		ALTER TABLE 表名 ADD COLUMN 字段名 字段类型;
+ELSE    
+    ALTER TABLE 表名 MODIFY COLUMN 字段名 字段类型;
+END IF; 
+END$$
+DELIMITER ;
+CALL PRO_ADD_COL();
+DROP PROCEDURE IF EXISTS PRO_ADD_COL;
+##GOGO
+```
+### 修改表字段
+```
+##AUTHOR:XXX
+##DATE:XXXX-XX-XX
+##DESCRIPTION:修改表字段
+
+DROP PROCEDURE IF EXISTS PRO_ADD_COL;
+DELIMITER $$
+CREATE PROCEDURE PRO_ADD_COL()
+BEGIN
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE()  AND TABLE_NAME = '表名' AND COLUMN_NAME = '字段名') THEN
+       ALTER TABLE 表名 MODIFY 字段名 字段类型;
+END IF; 
+END$$
+DELIMITER ;
+CALL PRO_ADD_COL();
+DROP PROCEDURE IF EXISTS PRO_ADD_COL;
+##GOGO
+```
+### 删除表字段
+```
+##AUTHOR:XXX
+##DATE:XXXX-XX-XX
+##DESCRIPTION:删除表字段
+
+DROP PROCEDURE IF EXISTS PRO_ADD_COL;
+DELIMITER $$
+CREATE PROCEDURE PRO_ADD_COL()
+BEGIN
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE()  AND TABLE_NAME = '表名' AND COLUMN_NAME = '字段名') THEN
+   ALTER TABLE 表名 DROP COLUMN 字段名;
+END IF;
+END$$
+DELIMITER ;
+CALL PRO_ADD_COL();
+DROP PROCEDURE IF EXISTS PRO_ADD_COL;
+##GOGO
+```
+### 新增数据
+```
+##AUTHOR:XXX
+##DATE:XXXX-XX-XX
+##DESCRIPTION:新增数据
+
+insert into 表名 (ID, XXX, XXX)
+select 'XX', 'XX', 'XX' from dual 
+where not exists (select 1 from sys_multi_lang where ID = 'XX' limit 1);
+##GOGO
+```
+### 修改数据
+```
+##AUTHOR:XXX
+##DATE:XXXX-XX-XX
+##DESCRIPTION:修改数据
+
+UPDATE 表名 SET 字段名 = '字段值' WHERE id = 'XX';
+COMMIT;
+##GOGO
+```
+### 删除数据
+```
+##AUTHOR:XXX
+##DATE:XXXX-XX-XX
+##DESCRIPTION:删除数据
+
+DELETE FROM 表名 WHERE ID = 'XX';
+COMMIT;
+##GOGO
+```
+## SQL SERVER
+### 创建表
+```
+--AUTHOR:XXX
+--DATE:XXXX-XX-XX
+--DESCRIPTION:创建表
+
+IF NOT EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'表名') AND OBJECTPROPERTY(ID, N'ISUSERTABLE') = 1)
+create table 表名  (
+  ID            VARCHAR(32),  
+  字段名        DECIMAL(15,2),
+  字段名        DATETIME,
+  constraint 主键名 primary key (ID)
+);
+GO
+```
+### 删除表
+```
+--AUTHOR:XXX
+--DATE:XXXX-XX-XX
+--DESCRIPTION:删除表
+
+DROP TABLE IF EXISTS 表名;
+```
+### 新增表字段
+```
+--AUTHOR:XXX
+--DATE:XXXX-XX-XX
+--DESCRIPTION:新增表字段
+
+IF NOT EXISTS (SELECT 1 FROM dbo.SYSCOLUMNS WHERE ID=OBJECT_ID('表名') AND NAME='字段名')
+    ALTER TABLE 表名 ADD 字段名 字段类型;
+GO
+```
+### 修改表字段
+```
+--AUTHOR:XXX
+--DATE:XXXX-XX-XX
+--DESCRIPTION:修改表字段
+
+IF NOT EXISTS (SELECT 1 FROM DBO.SYSCOLUMNS WHERE ID=OBJECT_ID('表名') AND NAME='字段名')
+	ALTER TABLE 表名 ADD 字段名 字段类型;
+ELSE
+	ALTER TABLE 表名 ALTER COLUMN 字段名 字段类型;
+GO
+```
+### 删除表字段
+```
+--AUTHOR:XXX
+--DATE:XXXX-XX-XX
+--DESCRIPTION:删除表字段
+
+IF EXISTS (SELECT 1 FROM DBO.SYSCOLUMNS WHERE ID=OBJECT_ID('表名') AND NAME = '字段名')
+ALTER TABLE 表名 DROP COLUMN 字段名;
+GO
+```
+### 新增数据
+```
+--AUTHOR:XXX
+--DATE:XXXX-XX-XX
+--DESCRIPTION:新增数据
+IF NOT EXISTS (SELECT * FROM 表名 WHERE ID='XX') 
+	INSERT INTO  表名 (ID, NAME, AGE) 
+	VALUES ('XX', 'XX', 'XX');
+GO
+```
+### 修改数据
+```
+--AUTHOR:XXX
+--DATE:XXXX-XX-XX
+--DESCRIPTION:修改数据
+
+UPDATE 表名 SET 字段名 = '字段值' WHERE ID = 'XX';
+GO
+```
+### 删除数据
+```
+--AUTHOR:XXX
+--DATE:XXXX-XX-XX
+--DESCRIPTION:删除数据
+
+DELETE FROM 表名 WHERE 表名.ID='XX';
+GO
+```
+
+
+
+
+
+
+
+
+
+
+
