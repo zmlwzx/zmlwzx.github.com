@@ -1,0 +1,201 @@
+## ORCL
+### 创建表
+```
+--AUTHOR:XXX
+--DATE:XXXX-XX-XX
+--DESCRIPTION:创建表
+
+DECLARE
+VN_COUNT NUMBER;
+VC_STR VARCHAR2(2000);
+BEGIN
+  --查看该表是否存在
+  SELECT COUNT(*)
+    INTO VN_COUNT
+    FROM USER_TABLES WHERE TABLE_NAME= '表名';
+  --如果小于1则说明不存在,则新增表
+  IF VN_COUNT < 1 THEN
+    VC_STR := ' create table 表名  (
+         ID         VARCHAR2(32),
+         字段名     NUMBER(12,4),
+         字段名     TIMESTAMP(6),
+         constraint 主键名 primary key (ID)
+      )';
+  EXECUTE IMMEDIATE VC_STR;
+  EXECUTE IMMEDIATE 'comment on table 表名 is ''XXXX表''';
+  EXECUTE IMMEDIATE 'comment on column 表名.ID is ''ID''';
+  EXECUTE IMMEDIATE 'comment on column 表名.字段名 is ''字段说明''';
+  EXECUTE IMMEDIATE 'comment on column 表名.字段名 is ''字段说明''';
+  END IF;
+END;
+/
+```
+### 删除表
+```
+--AUTHOR:XXX
+--DATE:XXXX-XX-XX
+--DESCRIPTION:删除表
+
+DECLARE 
+VN_COUNT NUMBER;
+VC_STR VARCHAR2(2000);
+BEGIN
+  --查看该表是否存在
+  SELECT COUNT(*)
+   INTO VN_COUNT
+    FROM USER_TABLES WHERE TABLE_NAME='表名';
+  --如果大于0则说明存在,则删除表
+  IF VN_COUNT > 0 THEN
+    VC_STR := 'DROP TABLE 表名';
+EXECUTE IMMEDIATE VC_STR;
+  END IF;
+END;
+/
+```
+### 新增表字段
+```
+--AUTHOR:XXX
+--DATE:XXXX-XX-XX
+--DESCRIPTION:新增表字段
+
+DECLARE V_COUNT NUMBER;
+V_STR VARCHAR2(1000);
+BEGIN
+  SELECT COUNT(*)
+    INTO V_COUNT
+    FROM USER_TAB_COLUMNS
+   WHERE TABLE_NAME = '表名'
+     AND COLUMN_NAME = '字段名';
+  IF V_COUNT < 1 THEN
+    V_STR := 'ALTER TABLE 表名 ADD 字段名 字段类型';
+    EXECUTE IMMEDIATE V_STR;
+    EXECUTE IMMEDIATE 'comment on column 表名.字段名 is ''字段说明''';
+  END IF;
+END;
+/
+
+```
+### 修改表字段
+```
+--AUTHOR:XXX
+--DATE:XXXX-XX-XX
+--DESCRIPTION:修改表字段
+
+DECLARE V_COUNT NUMBER;
+V_STR VARCHAR2(1000);
+BEGIN
+  SELECT COUNT(*)
+    INTO V_COUNT
+    FROM USER_TAB_COLUMNS
+   WHERE TABLE_NAME = '表名'
+     AND COLUMN_NAME = '字段名';
+  IF V_COUNT = 1 THEN
+    V_STR := 'ALTER TABLE 表名 MODIFY 字段名 字段类型';
+    EXECUTE IMMEDIATE V_STR;
+  END IF;
+END;
+/
+
+```
+### 删除表字段
+```
+--AUTHOR:XXX
+--DATE:XXXX-XX-XX
+--DESCRIPTION:删除表字段
+
+DECLARE V_COUNT NUMBER;
+V_STR VARCHAR2(1000);
+BEGIN
+  SELECT COUNT(*)
+    INTO V_COUNT
+    FROM USER_TAB_COLUMNS
+   WHERE TABLE_NAME = '表名'
+     AND COLUMN_NAME = '字段名';
+  IF V_COUNT = 1 THEN
+    V_STR := 'ALTER TABLE 表名 DROP COLUMN 字段名';
+    EXECUTE IMMEDIATE V_STR;
+  END IF;
+END;
+/
+
+```
+
+### 新增数据
+```
+--AUTHOR:XXX
+--DATE:XXXX-XX-XX
+--DESCRIPTION:新增数据
+
+DECLARE
+  V_COUNT NUMBER;       
+BEGIN
+  --查看该表中该菜单是否存在
+  SELECT COUNT(*) 
+    INTO V_COUNT
+    FROM 表名  
+   WHERE ID = XX;
+  --如果小于1则说明不存在，则新增菜单
+  IF V_COUNT < 1 THEN
+     INSERT INTO 表名 (ID, XX, XX)
+  VALUES ('XX', 'XX', 'XX');
+  END IF;
+  COMMIT;
+END;
+/
+
+```
+### 修改数据
+```
+--AUTHOR:XXX
+--DATE:XXXX-XX-XX
+--DESCRIPTION:修改数据
+
+UPDATE 表名 SET 字段名 = 字段值 WHERE ID = 'XX';
+COMMIT;
+/
+```
+### 删除数据
+```
+--AUTHOR:XXX
+--DATE:XXXX-XX-XX
+--DESCRIPTION:删除数据
+
+DELETE FROM 表名 WHERE ID = 'XX';
+COMMIT;
+/
+```
+### 新增主键
+```
+DECLARE
+  VN_COUNT NUMBER;
+BEGIN
+  SELECT COUNT(*)
+    INTO VN_COUNT
+    FROM USER_CONSTRAINTS
+   WHERE TABLE_NAME = '表名'
+     AND CONSTRAINT_NAME = 'PK_表名_ID';(主键名称)
+  IF VN_COUNT = 0 THEN
+    EXECUTE IMMEDIATE 'ALTER TABLE 表名 ADD CONSTRAINT PK_表名_ID PRIMARY KEY (ID)';
+  END IF;
+COMMIT;
+END;
+/
+```
+### 新增索引
+```
+DECLARE
+  VN_COUNT NUMBER;
+BEGIN
+  SELECT COUNT(*)
+    INTO VN_COUNT
+    FROM USER_INDEXES
+   WHERE INDEX_NAME = 'IDX_表名'
+     AND TABLE_NAME = '表名';
+  IF VN_COUNT =0 THEN
+    EXECUTE IMMEDIATE 'CREATE INDEX IDX_表名 ON 表名(字段名)';
+  END IF;
+  COMMIT;
+END;
+/
+
+```
