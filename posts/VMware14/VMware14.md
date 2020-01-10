@@ -3,6 +3,7 @@
 - VMware Workstation Pro 14
 - Mac OS 10.13镜像
 - Unlocker v3.0.0
+- Vmware Tools
 ```
 链接：
 ```
@@ -115,6 +116,30 @@
 13. 完成安装
 ![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/26.png)
 
+14. 安装后可看到以下的界面，右面有个盘符提示，可以选择推出，这个是苹果的安装系统！
+至此，高大上的黑苹果安装完毕！但此处会发现虚拟机中的屏幕无法全屏，这时候需要安装下Vmware Tools，才能全屏。
+
+## 安装下Vmware Tools
+1.在安装Vmware Tools前，保证先右键点击桌面右上角的DVD图标，选择【推出"Sierra Custom Installer"】，如果不推出，此时报错“无法继续执行此操作，因为Mac OS客户机正在使用CD/DVD”。点击VMware的菜单【虚拟机】->【安装 VMware Tools】。
+
+![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/27.png)
+![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/28.png)
+
+2. 双击打开桌面右上角的【VMware Tools】
+3. 在弹出窗口中双击【安装 VMware Tools】
+4. 在下一个层叠弹出窗口中点击【继续】->【继续】
+5. 在下一个弹出窗口中点击【安装】->【继续安装】
+6. 输入Mac OS系统的登录密码，点击【安装软件】
+7. 安装成功后，点击【重新启动】
+
+![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/29png)
+
+8. 联网
+```
+注意：如果此时Mc OS连接不上网络，是因为VMware的服务还处于关闭状态，全部开启即可。
+VMWare 安装完成后，打开任务管理器：win+R，输入 services.msc，将关于 VMware 的服务全部启动运行 
+```
 ---
+
 
 
