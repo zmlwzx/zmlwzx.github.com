@@ -11,7 +11,7 @@
 - VMware14 安装直接继续下一步即可，许可证激活密钥百度即可
 - VMWare 安装完成后，打开任务管理器：win+R，输入 services.msc，将关于 VMware 的服务全部停止运行 
 
-![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/服务.jpg)
+![image](https://github.com/zmlwzx/zmlwzx.github.com/tree/master/images/VMware/服务.jpg)
 
 - (MAC 补丁):解压 Unlocker 文件，右键选择以管理员身份运行，等待运行完
 ```
