@@ -54,15 +54,66 @@
 
 ## Mac 系统配置
 ---
-1. 此时发现有如下报错，需要修改Mac-10.vmx(虚拟机名称)文件，编辑VMX文件，在 smc.present = "TRUE" 后面添加了 smc.version = 0,保存退出,重新启动客户机。
+- 此时发现有如下报错，需要修改Mac-10.vmx(虚拟机名称)文件，编辑VMX文件，在 smc.present = "TRUE" 后面添加了 smc.version = 0,保存退出,重新启动客户机。
 
 ![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/7.png)
 ![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/8.png)
 
-2. 安装Mac OS
-- 进入安装界面
+- 安装Mac OS
+1. 进入安装界面
 
+![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/10.png)
 
+2. 选择简体中文，点击下一步箭头
+
+![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/11.png)
+
+3. 一直点击继续或下一步即可
+
+![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/12.png)
+![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/13.png)
+
+4. 点击同意
+
+![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/14.png)
+
+5. 点击界面上方实用工具----->磁盘工具
+
+![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/15.png)
+
+6. 选择VMware Virtual SATA Hard Drive Media，点击界面上方抹去，设置名称Mac OS，点击 抹去
+
+![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/16.png)
+
+7. 点击完成，并退出磁盘工具。
+
+![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/17.png)
+
+8. 选择mac OS，点击继续
+
+![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/18.png)
+
+9. 等待安装完成
+
+![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/19.png)
+
+10. 选择中国，点击继续
+
+![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/20.png)
+
+11. 一直点击继续，需要是否同意 点击 同意
+
+![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/21.png)
+![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/22.png)
+
+12. 可以点击稍后设置,设置全名和密码，点击继续
+
+![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/23.png)
+![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/24.png)
+![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/25.png)
+
+13. 完成安装
+![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/26.png)
 
 ---
 
