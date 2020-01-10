@@ -5,7 +5,7 @@
 - Unlocker v3.0.0
 - Vmware Tools
 ```
-链接：
+链接：链接：https://pan.baidu.com/s/150azixctwtPJY-N1grS39A 提取码：evfj 
 ```
 ## 安装步骤
 - VMware14 安装直接继续下一步即可，许可证激活密钥百度即可
@@ -131,7 +131,7 @@
 6. 输入Mac OS系统的登录密码，点击【安装软件】
 7. 安装成功后，点击【重新启动】
 
-![image](https://zmlwzx.github.io/images/VMware/29png)
+![image](https://zmlwzx.github.io/images/VMware/29.png)
 
 8. 联网
 ```
