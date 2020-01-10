@@ -11,7 +11,7 @@
 - VMware14 安装直接继续下一步即可，许可证激活密钥百度即可
 - VMWare 安装完成后，打开任务管理器：win+R，输入 services.msc，将关于 VMware 的服务全部停止运行 
 
-![image](https://github.com/zmlwzx/zmlwzx.github.com/tree/master/images/VMware/服务.jpg)
+![image](https://zmlwzx.github.io/images/VMware/服务.jpg)
 
 - (MAC 补丁):解压 Unlocker 文件，右键选择以管理员身份运行，等待运行完
 ```
@@ -19,8 +19,8 @@
 官方原版VMware是不支持MAC OS安装的,所以需要Unlocker工具。
 ```
 
-![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/unlocker-1.jpg)
-![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/unlocker-2.jpg)
+![image](https://zmlwzx.github.io/images/VMware/unlocker-1.jpg)
+![image](https://zmlwzx.github.io/images/VMware/unlocker-2.jpg)
 ---
 ## VMware 创建 Mac 虚拟机
 1.* 打开VMware 14，创建新的虚拟机，此处安装了典型（推荐）下的配置类型，下一步
