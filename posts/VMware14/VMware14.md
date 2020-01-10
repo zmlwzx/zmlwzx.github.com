@@ -23,8 +23,9 @@
 
 ---
 ## VMware 创建 Mac 虚拟机
-1. 此处安装了典型（推荐）下的配置类型，下一步
+1. 打开VMware 14，创建新的虚拟机，此处安装了典型（推荐）下的配置类型，下一步
 
+![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/界面.jpg)
 ![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/1.png)
 
 2. 选择程序光盘映像文件，选择下载好的10.13.cdr文件
@@ -50,4 +51,21 @@
 
 ![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/6.png)
 ---
+
+## Mac 系统配置
+---
+1. 此时发现有如下报错，需要修改Mac-10.vmx(虚拟机名称)文件，编辑VMX文件，在 smc.present = "TRUE" 后面添加了 smc.version = 0,保存退出,重新启动客户机，出现下面你的界面
+
+![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/7.png)
+![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/8.png)
+![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/9.png)
+
+
+2. 系统安装
+- 进入语言选择界面，本人选择的自然是中文简体.
+
+
+
+---
+
 
