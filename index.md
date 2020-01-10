@@ -12,3 +12,7 @@ description: 星仔随笔
 
 ## PS学习
 
+## VMware14 虚拟机安装MAC OS 13
+- [VMware14](/posts/VMware14/VMware14.md)
+
+
