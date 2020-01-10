@@ -21,7 +21,6 @@
 
 ![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/unlocker-1.jpg)
 ![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/unlocker-2.jpg)
-
 ---
 ## VMware 创建 Mac 虚拟机
 1.* 打开VMware 14，创建新的虚拟机，此处安装了典型（推荐）下的配置类型，下一步
