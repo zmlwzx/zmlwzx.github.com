@@ -54,15 +54,13 @@
 
 ## Mac 系统配置
 ---
-1. 此时发现有如下报错，需要修改Mac-10.vmx(虚拟机名称)文件，编辑VMX文件，在 smc.present = "TRUE" 后面添加了 smc.version = 0,保存退出,重新启动客户机，出现下面你的界面
+1. 此时发现有如下报错，需要修改Mac-10.vmx(虚拟机名称)文件，编辑VMX文件，在 smc.present = "TRUE" 后面添加了 smc.version = 0,保存退出,重新启动客户机。
 
 ![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/7.png)
 ![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/8.png)
-![image](https://github.com/zmlwzx/zmlwzx.github.com/blob/master/images/VMware/9.png)
 
-
-2. 系统安装
-- 进入语言选择界面，本人选择的自然是中文简体.
+2. 安装Mac OS
+- 进入安装界面
 
 
 
