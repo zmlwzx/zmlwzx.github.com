@@ -1,18 +1,32 @@
 ---
-title: 星说
-description: 星仔随笔
+layout: default
+title: 随笔
+description: 星仔空间
 ---
 
-## 数据库
-- [Oracle](/posts/oracle/Oracle.md)
-- [MySql](/posts/mysql/MySql.md)
-- [SqlLServer](/posts/sqlserver/SqlServer.md)
+<h2><i class="fa fa-minus-square-o"></i> 最近更新</h2>
+<ul class="posts-list">
+    {% for post in site.posts limit:5 %}
+    <li class=posts-item”>
+        <a href="{{ post.url }}">[{{ post.categories }}] {{ post.title }}<div class="posts-date">{{ post.date | date:"%Y-%m-%d"}}</div></a>
+    </li>
+    {% endfor %}
+</ul>
 
-## spring
+<h2><i class="fa fa-folder-open-o"></i> 文章分类</i></h2>
 
-## PS学习
+{% for category in site.categories %}
+<h3><i class="fa fa-bookmark-o"></i> {{ category | first }}</h2>
+<ul class="category-list">
+    {% for post in category.last %}
+    <li class="category-item"><a href="{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+</ul>
+{% endfor %}
 
-## VMware14 虚拟机安装MAC OS 13
-- [VMware14](/posts/VMware14/VMware14.md)
-
-
+<h2><i class="fa fa-star-o"></i> 收藏夹</i></h2>
+<ul class="category-list">
+    {% for favorite in site.favorites %}
+    <li class="category-item"><a target="_blank" href="{{ favorite.url }}">{{ favorite.title }}</a></li>
+    {% endfor %}
+</ul>
