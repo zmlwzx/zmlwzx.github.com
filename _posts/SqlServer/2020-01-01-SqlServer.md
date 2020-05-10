@@ -1,3 +1,11 @@
+---
+title: SqlServer收集
+categories: DB
+permalink: /posts/sqlserver.html
+toc: true
+date: 2019-01-01
+---
+
 ## SQL SERVER
 ### 创建表
 ```
